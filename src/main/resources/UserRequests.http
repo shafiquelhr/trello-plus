@@ -1,0 +1,24 @@
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "Ali",
+  "email": null,
+  "role": "INTERNEE",
+  "projectUnderManagement": "TrelloLegacy",
+  "username": "shafique7z",
+  "passwordHash": "salt@123",
+  "createdAt": "2025-07-21T10:10:00",
+  "updatedAt": "2025-07-21T10:20:10",
+  "lastLogin": "2025-07-21T12:30:20",
+  "isActive": false,
+  "phone": "1230000890",
+  "avatarUrl": "https://example.com/avatar2.png",
+  "bio": "Intern at TrelloPlus",
+  "location": "Gulberg"
+}
+
+###
+
+GET http://localhost:8080/api/users
+Content-Type: application/json
