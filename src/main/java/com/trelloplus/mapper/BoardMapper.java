@@ -6,6 +6,8 @@ import com.trelloplus.model.Project;
 import com.trelloplus.model.User;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class BoardMapper {
 
@@ -35,8 +37,8 @@ public class BoardMapper {
         board.setName(dto.getName());
         board.setDescription(dto.getDescription());
         board.setVisibility(dto.getVisibility());
-        board.setCreatedAt(dto.getCreatedAt());
-        board.setUpdatedAt(dto.getUpdatedAt());
+        board.setCreatedAt(dto.getCreatedAt() != null ? dto.getCreatedAt() : LocalDateTime.now());
+        board.setUpdatedAt(dto.getUpdatedAt() != null ? dto.getUpdatedAt() : LocalDateTime.now());
 
         if (dto.getCreatedById() != null) {
             User user = new User();

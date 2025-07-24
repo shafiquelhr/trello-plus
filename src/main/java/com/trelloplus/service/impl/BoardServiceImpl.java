@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//TODO: CREATE CUSTOM EXCEPTIONS
-
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -32,6 +30,5 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Board getBoardById(Long id) {
         return boardRepository.findById(id).orElseThrow(() -> new BoardNotFoundException(id));
-
     }
 }

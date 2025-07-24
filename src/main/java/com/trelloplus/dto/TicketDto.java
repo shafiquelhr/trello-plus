@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class TicketDto {
-    // Renamed from ticketId to id to match the entity
     private Long id;
     private String title;
     private String description;

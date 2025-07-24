@@ -19,10 +19,8 @@ public class ProjectDto {
     private LocalDate endDate;
     private Integer estimatedDays;
     private Integer actualDays;
-
     private Long teamLeadId;
     private Long createdById;
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

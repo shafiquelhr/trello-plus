@@ -28,7 +28,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> getCommentsByTicketId(Long ticketId) {
-        // Updated to use the new repository method that uses Ticket's 'id' field
         return commentRepository.findByTicket_Id(ticketId);
     }
 }

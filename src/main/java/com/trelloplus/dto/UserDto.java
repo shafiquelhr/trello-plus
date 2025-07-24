@@ -1,26 +1,19 @@
 package com.trelloplus.dto;
 
-import com.trelloplus.enums.Role;
-import com.trelloplus.model.User;
-import lombok.Getter;
-import lombok.Setter;
+import com.trelloplus.enums.UserRole;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-
-@Getter
-@Setter
+@Data
 public class UserDto {
 
     private Long id;
     private String name;
     private String email;
-    private Role role;
-
-    // Can include a list of project IDs or names instead of full objects
+    private UserRole role;
     private List<Long> projectsManagedIds;
-
     private String username;
     private String passwordHash;
     private LocalDateTime createdAt;
@@ -32,10 +25,11 @@ public class UserDto {
     private String bio;
     private String location;
 
+
     public UserDto(Long id,
                    String name,
                    String email,
-                   Role role,
+                   UserRole role,
                    List<Long> projectsManagedIds,
                    String username,
                    String passwordHash,
@@ -63,4 +57,5 @@ public class UserDto {
         this.bio = bio;
         this.location = location;
     }
+
 }

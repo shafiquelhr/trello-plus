@@ -15,7 +15,7 @@ public class CommentMapper {
         CommentDto dto = new CommentDto();
         dto.setId(comment.getId());
         dto.setContent(comment.getContent());
-        // Updated to use id instead of ticketId
+        // ipdated to use id instead of ticketId
         dto.setTicketId(comment.getTicket().getId());
         dto.setCommentedById(comment.getCommentedBy().getId());
         dto.setCommentedAt(comment.getCommentedAt());

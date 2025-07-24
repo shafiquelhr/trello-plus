@@ -21,8 +21,6 @@ public class Comment {
     private String content;
 
     @ManyToOne
-    // Ensuring the foreign key properly references Ticket's primary key (now 'id')
-    // Name remains 'ticket_id' for the database column
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
 

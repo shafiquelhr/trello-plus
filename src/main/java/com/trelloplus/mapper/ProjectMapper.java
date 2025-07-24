@@ -5,6 +5,9 @@ import com.trelloplus.model.Project;
 import com.trelloplus.model.User;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Component
 public class ProjectMapper {
 
@@ -38,12 +41,14 @@ public class ProjectMapper {
         project.setClientName(dto.getClientName());
         project.setSource(dto.getSource());
         project.setStatus(dto.getStatus());
-        project.setStartDate(dto.getStartDate());
+        // Optional fallback: assume start date = today if null
+        project.setStartDate(dto.getStartDate() != null ? dto.getStartDate() : LocalDate.now());
         project.setEndDate(dto.getEndDate());
-        project.setEstimatedDays(dto.getEstimatedDays());
+        project.setEstimatedDays(dto.getEstimatedDays() != null ? dto.getEstimatedDays() : 30);
         project.setActualDays(dto.getActualDays());
-        project.setCreatedAt(dto.getCreatedAt());
-        project.setUpdatedAt(dto.getUpdatedAt());
+        project.setCreatedAt(dto.getCreatedAt() != null ? dto.getCreatedAt() : LocalDateTime.now());
+        project.setUpdatedAt(dto.getUpdatedAt() != null ? dto.getUpdatedAt() : LocalDateTime.now());
+
 
         // Foreign key objects will be injected in service
         return project;

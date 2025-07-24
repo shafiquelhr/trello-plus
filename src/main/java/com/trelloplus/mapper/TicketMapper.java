@@ -6,6 +6,9 @@ import com.trelloplus.model.Ticket;
 import com.trelloplus.model.User;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Component
 public class TicketMapper {
 
@@ -40,9 +43,14 @@ public class TicketMapper {
         ticket.setAssignedTo(assignedTo);
         ticket.setAssignedBy(assignedBy);
         ticket.setBoard(board);
-        ticket.setCreatedAt(dto.getCreatedAt());
-        ticket.setDeadline(dto.getDeadline());
-        ticket.setUpdatedAt(dto.getUpdatedAt());
+
+        // Default to now if not provided
+        ticket.setCreatedAt(dto.getCreatedAt() != null ? dto.getCreatedAt() : LocalDateTime.now());
+        ticket.setUpdatedAt(dto.getUpdatedAt() != null ? dto.getUpdatedAt() : LocalDateTime.now());
+
+        // Default deadline = 7 days from now
+        ticket.setDeadline(dto.getDeadline() != null ? dto.getDeadline() : LocalDate.now().plusDays(7));
+
         ticket.setPriority(dto.getPriority());
         ticket.setEstimatedHours(dto.getEstimatedHours());
         ticket.setActualHours(dto.getActualHours());

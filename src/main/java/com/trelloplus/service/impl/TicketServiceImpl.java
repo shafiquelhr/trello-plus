@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-//TODO: replace RuntimeException with a custom ResourceNotFoundException.
-
 @Service
 public class TicketServiceImpl implements TicketService {
 

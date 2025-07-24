@@ -1,6 +1,6 @@
 package com.trelloplus.enums;
 
-public enum Role {
+public enum UserRole {
     ADMIN,
     DIRECTOR,
     LEAD,

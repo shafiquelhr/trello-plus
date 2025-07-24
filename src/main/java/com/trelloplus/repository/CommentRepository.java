@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    // Updated to use Ticket's new primary key name 'id' instead of 'ticketId'
     List<Comment> findByTicket_Id(Long ticketId);
 }

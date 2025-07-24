@@ -1,6 +1,6 @@
 package com.trelloplus.model;
 
-import com.trelloplus.enums.Role;
+import com.trelloplus.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +21,7 @@ public class User {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private UserRole role;
 
     @OneToMany(mappedBy = "teamLead")
     private List<Project> projectsManaged = new ArrayList<>();

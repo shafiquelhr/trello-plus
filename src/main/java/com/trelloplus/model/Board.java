@@ -1,7 +1,6 @@
 package com.trelloplus.model;
 
 import com.trelloplus.enums.BoardVisibility;
-import com.trelloplus.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

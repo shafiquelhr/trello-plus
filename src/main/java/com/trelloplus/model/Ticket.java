@@ -21,8 +21,6 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // Fixing naming inconsistency: renamed from ticketId to id to match foreign key references
-    // This ensures compatibility with the Comment entity's foreign key
     private Long id;
 
     private String title;

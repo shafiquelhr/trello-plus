@@ -5,6 +5,7 @@ import com.trelloplus.model.Project;
 import com.trelloplus.model.User;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,9 +46,9 @@ public class UserMapper {
         user.setRole(dto.getRole());
         user.setUsername(dto.getUsername());
         user.setPasswordHash(dto.getPasswordHash());
-        user.setCreatedAt(dto.getCreatedAt());
-        user.setUpdatedAt(dto.getUpdatedAt());
-        user.setLastLogin(dto.getLastLogin());
+        user.setCreatedAt(dto.getCreatedAt() != null ? dto.getCreatedAt() : LocalDateTime.now());
+        user.setUpdatedAt(dto.getUpdatedAt() != null ? dto.getUpdatedAt() : LocalDateTime.now());
+        user.setLastLogin(dto.getLastLogin() != null ? dto.getLastLogin() : null); // optional fallback here
         user.setActive(dto.isActive());
         user.setPhone(dto.getPhone());
         user.setAvatarUrl(dto.getAvatarUrl());
