@@ -48,14 +48,13 @@ public class UserMapper {
         user.setPasswordHash(dto.getPasswordHash());
         user.setCreatedAt(dto.getCreatedAt() != null ? dto.getCreatedAt() : LocalDateTime.now());
         user.setUpdatedAt(dto.getUpdatedAt() != null ? dto.getUpdatedAt() : LocalDateTime.now());
-        user.setLastLogin(dto.getLastLogin() != null ? dto.getLastLogin() : null); // optional fallback here
+        user.setLastLogin(dto.getLastLogin() != null ? dto.getLastLogin() : LocalDateTime.now());
         user.setActive(dto.isActive());
         user.setPhone(dto.getPhone());
         user.setAvatarUrl(dto.getAvatarUrl());
         user.setBio(dto.getBio());
         user.setLocation(dto.getLocation());
 
-        // We don't manually set projectsManaged here; it is managed by Project entity
         return user;
     }
 }

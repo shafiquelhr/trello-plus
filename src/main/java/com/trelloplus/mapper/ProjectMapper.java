@@ -41,7 +41,6 @@ public class ProjectMapper {
         project.setClientName(dto.getClientName());
         project.setSource(dto.getSource());
         project.setStatus(dto.getStatus());
-        // Optional fallback: assume start date = today if null
         project.setStartDate(dto.getStartDate() != null ? dto.getStartDate() : LocalDate.now());
         project.setEndDate(dto.getEndDate());
         project.setEstimatedDays(dto.getEstimatedDays() != null ? dto.getEstimatedDays() : 30);
