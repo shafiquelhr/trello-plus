@@ -1,28 +1,27 @@
 package com.trelloplus.mapper;
 
 import com.trelloplus.dto.UserDto;
-import com.trelloplus.enums.Role;
+import com.trelloplus.model.Project;
 import com.trelloplus.model.User;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
 
-    //to dto for controller layer
-    public UserDto toUserDTO(User user) {
+    public UserDto toUserDto(User user) {
+        if (user == null) return null;
 
-        if (user == null) {
-            return null;
-        }
+        List<Long> projectIds = user.getProjectsManaged().stream().map(Project::getId).collect(Collectors.toList());
 
         return new UserDto(
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
                 user.getRole(),
-                user.getProjectUnderManagement(),
+                projectIds,
                 user.getUsername(),
                 user.getPasswordHash(),
                 user.getCreatedAt(),
@@ -34,17 +33,16 @@ public class UserMapper {
                 user.getBio(),
                 user.getLocation()
         );
-
     }
 
-    //to User entity for serive and repo layers
     public User toEntity(UserDto dto) {
+        if (dto == null) return null;
+
         User user = new User();
         user.setId(dto.getId());
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
-        user.setRole(Role.valueOf(String.valueOf(dto.getRole())));
-        user.setProjectUnderManagement(dto.getProjectUnderManagement());
+        user.setRole(dto.getRole());
         user.setUsername(dto.getUsername());
         user.setPasswordHash(dto.getPasswordHash());
         user.setCreatedAt(dto.getCreatedAt());
@@ -55,7 +53,8 @@ public class UserMapper {
         user.setAvatarUrl(dto.getAvatarUrl());
         user.setBio(dto.getBio());
         user.setLocation(dto.getLocation());
+
+        // We don't manually set projectsManaged here; it is managed by Project entity
         return user;
     }
-
 }

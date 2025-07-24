@@ -1,17 +1,13 @@
 package com.trelloplus.service;
 
 import com.trelloplus.model.User;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface UserService {
+    User createUser(User user);
 
     List<User> getAllUsers();
 
-    User createUser(User user);
-
-    List<User> getUsersWithNoEmail();
+    User getUserById(Long id);
 }
-

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -15,7 +17,10 @@ public class UserDto {
     private String name;
     private String email;
     private Role role;
-    private String projectUnderManagement; // used only if role == LEAD
+
+    // Can include a list of project IDs or names instead of full objects
+    private List<Long> projectsManagedIds;
+
     private String username;
     private String passwordHash;
     private LocalDateTime createdAt;
@@ -27,13 +32,26 @@ public class UserDto {
     private String bio;
     private String location;
 
-    //old school
-    public UserDto(Long id, String name, String email, Role role, String projectUnderManagement, String username, String passwordHash, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime lastLogin, boolean isActive, String phone, String avatarUrl, String bio, String location) {
+    public UserDto(Long id,
+                   String name,
+                   String email,
+                   Role role,
+                   List<Long> projectsManagedIds,
+                   String username,
+                   String passwordHash,
+                   LocalDateTime createdAt,
+                   LocalDateTime updatedAt,
+                   LocalDateTime lastLogin,
+                   boolean isActive,
+                   String phone,
+                   String avatarUrl,
+                   String bio,
+                   String location) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.role = role;
-        this.projectUnderManagement = projectUnderManagement;
+        this.projectsManagedIds = projectsManagedIds;
         this.username = username;
         this.passwordHash = passwordHash;
         this.createdAt = createdAt;

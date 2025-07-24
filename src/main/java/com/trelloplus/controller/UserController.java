@@ -4,7 +4,6 @@ import com.trelloplus.dto.UserDto;
 import com.trelloplus.mapper.UserMapper;
 import com.trelloplus.model.User;
 import com.trelloplus.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,33 +23,19 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    //CREAT a new user;
+    // POST new user
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         User user = userMapper.toEntity(userDto);
         User savedUser = userService.createUser(user);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toUserDTO(savedUser));
+        return new ResponseEntity<>(userMapper.toUserDto(savedUser), HttpStatus.CREATED);
     }
 
-    //GET ALL users;
+    // GET all users
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
         List<User> users = userService.getAllUsers();
-        List<UserDto> dtos = users.stream()
-                .map(userMapper::toUserDTO)
-                .collect(Collectors.toList());
+        List<UserDto> dtos = users.stream().map(userMapper::toUserDto).collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
     }
-
-    //GET ALL users with no email;
-    @GetMapping("/no-email")
-    public ResponseEntity<List<UserDto>> getUsersWithNoEmail() {
-        List<User> users = userService.getUsersWithNoEmail();
-        List<UserDto> dtos = users.stream()
-                .map(userMapper::toUserDTO)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(dtos);
-    }
-
 }

@@ -4,11 +4,14 @@ package com.trelloplus.model;
 import com.trelloplus.enums.TicketPriority;
 import com.trelloplus.enums.TicketStatus;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,7 +21,9 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ticketId;
+    // Fixing naming inconsistency: renamed from ticketId to id to match foreign key references
+    // This ensures compatibility with the Comment entity's foreign key
+    private Long id;
 
     private String title;
 
@@ -43,27 +48,19 @@ public class Ticket {
     private Board board;
 
     private LocalDateTime createdAt;
-
     private LocalDate deadline;
-
     private LocalDateTime updatedAt;
 
     @Enumerated(EnumType.STRING)
     private TicketPriority priority; // consider making this an Enum
 
     private int estimatedHours;
-
     private int actualHours;
-
     private boolean isBlocked;
 
     @Column(columnDefinition = "TEXT")
     private String blockedReason;
 
-    private int commentsCount;
-
-    private String commentContent;
-
-
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
 }
-

@@ -1,4 +1,7 @@
 package com.trelloplus.repository;
 
-public interface ProjectRepository {
+import com.trelloplus.model.Project;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProjectRepository extends JpaRepository<Project, Long> {
 }
