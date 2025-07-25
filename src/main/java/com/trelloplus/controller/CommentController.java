@@ -8,6 +8,8 @@ import com.trelloplus.model.User;
 import com.trelloplus.service.CommentService;
 import com.trelloplus.service.TicketService;
 import com.trelloplus.service.UserService;
+import org.hibernate.internal.build.AllowNonPortable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -11,4 +11,3 @@ public interface LogClient {
     @PostMapping("/logs")
     void sendLog(@RequestBody LogEntryDto logEntryDto);
 }
-

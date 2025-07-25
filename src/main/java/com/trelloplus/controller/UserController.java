@@ -4,6 +4,7 @@ import com.trelloplus.dto.UserDto;
 import com.trelloplus.mapper.UserMapper;
 import com.trelloplus.model.User;
 import com.trelloplus.service.UserService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
