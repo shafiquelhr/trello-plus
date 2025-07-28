@@ -7,6 +7,7 @@ import com.trelloplus.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,4 +40,27 @@ public class UserController {
         List<UserDto> dtos = users.stream().map(userMapper::toUserDto).collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'DIRECTOR')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("User deleted successfully.");
+    }
+
+    //@PreAuthorize("hasAnyRole('ADMIN', 'DIRECTOR', 'LEAD', 'DEVELOPER', 'INTERNEE')")
+    @Transactional //for project ids because they're lazily initialized meaning they'll be loaded when they're available.
+    @GetMapping("/role/{roleName}")
+    public ResponseEntity<?> getUsersByRole(@PathVariable String roleName) {
+        try {
+            List<User> users = userService.findUsersByRole(roleName);
+            List<UserDto> dtos = users.stream()
+                    .map(userMapper::toUserDto)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(dtos);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 }

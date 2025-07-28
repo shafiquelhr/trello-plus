@@ -10,6 +10,7 @@ import com.trelloplus.service.TicketService;
 import com.trelloplus.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +37,8 @@ public class TicketController {
     }
 
     // POST create ticket
+    //only lead can create tickets now hehe
+    @PreAuthorize("hasRole('LEAD')")
     @PostMapping
     public ResponseEntity<TicketDto> createTicket(@RequestBody TicketDto ticketDto) {
         User assignedTo = userService.getUserById(ticketDto.getAssignedToId());

@@ -10,4 +10,8 @@ public interface UserService {
     List<User> getAllUsers();
 
     User getUserById(Long id);
+
+    void deleteUser(Long id);
+
+    List<User> findUsersByRole(String roleName);
 }
