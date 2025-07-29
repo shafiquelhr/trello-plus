@@ -57,16 +57,17 @@ public class User implements UserDetails {  // Now implements UserDetails, Sprin
     * that are instances of GrantedAuthority or its subclasses.*/
 
 
-    //Returns hashed password for login validation: [PASSWORDS ARE NEITHER HASHED NOR ENCRYPTED]
-    @Override
-    public String getPassword() {
-        return this.passwordHash;
-    }
 
     //Used to identify user during login
     @Override
     public String getUsername() {
         return this.username;
+    }
+
+    //Returns hashed password for login validation:
+    @Override
+    public String getPassword() {
+        return this.passwordHash;
     }
 
     @Override

@@ -5,8 +5,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "logger-service", url = "http://localhost:8081/")
-public interface LogClient {
+//feign client that will communicate with trello scheduler service
+
+@FeignClient(name = "trello-scheduler-service", url = "http://localhost:8081/")
+public interface TrelloSchedulerClient {
 
     @PostMapping("/logs")
     void sendLog(@RequestBody LogEntryDto logEntryDto);

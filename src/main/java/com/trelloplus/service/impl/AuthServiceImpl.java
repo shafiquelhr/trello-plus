@@ -41,7 +41,7 @@ public class AuthServiceImpl implements AuthService {
             Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken
                     (request.getUsername(), request.getPassword()));
 
-            // If successful, Spring returns the authenticated User
+            // If successful, Spring return the authenticated User
             User user = (User) authentication.getPrincipal();
 
             // Return JWT
@@ -59,16 +59,20 @@ public class AuthServiceImpl implements AuthService {
         if (userRepo.findByUsername(request.getUsername()).isPresent()) {
             throw new RuntimeException("Username already exists");
         }
+        //TODO: CREATE CUSTOM EXCEPTIONS
 
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setUsername(request.getUsername());
+
+        //make password hashed.
         String hashedPassword = passwordEncoder.encode(request.getPassword());
         user.setPasswordHash(hashedPassword);
+
         user.setRole(request.getRole());
-//        user.setActive(request.isActive());
-        user.setActive(true); //keep user enabled by defaulylt so they can login without email verifcation or sth like that.
+        //user.setActive(request.isActive());
+        user.setActive(true); //keep user enabled by default so they can log in without email verifcation or sth like that.
         user.setPhone(request.getPhone());
         user.setAvatarUrl(request.getAvatarUrl());
         user.setBio(request.getBio());

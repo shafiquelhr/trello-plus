@@ -1,6 +1,6 @@
 package com.trelloplus.service.impl;
 
-import com.trelloplus.client.LogClient;
+import com.trelloplus.client.TrelloSchedulerClient;
 import com.trelloplus.dto.LogEntryDto;
 import com.trelloplus.enums.LoggerApiEndpoints;
 import com.trelloplus.exception.TicketNotFoundException;
@@ -9,19 +9,17 @@ import com.trelloplus.repository.TicketRepository;
 import com.trelloplus.rest.RestApiService;
 import com.trelloplus.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
-    private final LogClient logClient; // Feign Client
+    private final TrelloSchedulerClient logClient; // Feign Client
     private final RestTemplate restTemplate; // inject RestTemplate
     private final RestApiService restApiService;
 
@@ -29,7 +27,7 @@ public class TicketServiceImpl implements TicketService {
     //private String loggerServiceUrl; // set in application.properties
 
     @Autowired
-    public TicketServiceImpl(TicketRepository ticketRepository, LogClient logClient, RestTemplate restTemplate, RestApiService restApiService) {
+    public TicketServiceImpl(TicketRepository ticketRepository, TrelloSchedulerClient logClient, RestTemplate restTemplate, RestApiService restApiService) {
         this.ticketRepository = ticketRepository;
         this.logClient = logClient;
         this.restTemplate = restTemplate;
